@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WRITEUP.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h2 id="challenge-scenario">Challenge Scenario</h2>
+<h2 id="initial-investigation">Initial Investigation</h2>
+<p>Upon opening the PCAP file, before doing anything else, I wanted to get a bird's-eye view of what<br>
+we're working with. I started by checking the <strong>Protocol Hierarchy</strong> and <strong>IPv4 Statistics</strong> —<br>
+two really useful features in Wireshark that let you see the big picture before diving into<br>
+individual packets.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image.png" alt="alt text"></p>
+<p>The <strong>Protocol Hierarchy</strong> tells you what percentage of the captured traffic belongs to each<br>
+protocol. In this case, it shows that the session is mostly made up of <strong>TCP</strong> traffic, with some<br>
+<strong>SMTP</strong> traffic mixed in as well.</p>
+<p>The <strong>IPv4 Statistics</strong> also revealed that two addresses — <code>192.168.68.111</code> and <code>185.125.190.39</code><br>
+— have the highest number of occurrences and appear to be communicating with each other the most.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-1.png" alt="alt text"></p>
+<p>Next, I filtered for <strong>HTTP</strong> streams to see if there was anything useful hiding there. The results<br>
+turned out to be what looked like a legitimate Ubuntu system update, so the HTTP traffic wasn't<br>
+relevant to our investigation.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-2.png" alt="alt text"></p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-3.png" alt="alt text"></p>
+<p>Moving on, I decided to take a closer look at the <strong>SMTP</strong> traffic.</p>
+<p>Before we continue, let me quickly explain what SMTP actually is, since it's pretty central to<br>
+this challenge. <strong>SMTP</strong>, or <strong>Simple Mail Transfer Protocol</strong>, is the standard protocol used for<br>
+sending emails over the Internet. It's a text-based protocol that operates at the <strong>application<br>
+layer</strong>, and it uses <strong>TCP</strong> connections under the hood to make sure data is delivered reliably<br>
+and in the correct order. The important thing to note here is that SMTP can transmit data<br>
+<strong>in plaintext</strong>, meaning that if you capture SMTP traffic, you might be able to read emails,<br>
+usernames, passwords, and attachments directly — which makes it a valuable target for attackers<br>
+and a goldmine for investigators.</p>
+<p>After filtering for SMTP traffic, some suspicious activity started to reveal itself.</p>
+<p>Specifically, a suspicious email address — <code>caleb@thefreaks.com</code> — was repeatedly sending emails<br>
+with the subject line <code>Secure File Transfer</code> to the recipient <code>resources@thetalents.com</code>.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-4.png" alt="alt text"></p>
+<p>Using Wireshark's <strong>Follow TCP Stream</strong> feature (which lets you reconstruct and read the full<br>
+conversation of a TCP connection in human-readable form), I was able to read the actual content<br>
+of the emails.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-5.png" alt="alt text"></p>
+<p>Interestingly, each email's subject line also contained a <strong>password value</strong> — likely for<br>
+unlocking some kind of protected file. This pattern repeated across <strong>15 more streams</strong>, and<br>
+each time the password was different, as was the <strong>Base64-encoded</strong> content inside the email<br>
+body.</p>
+<p>My guess at this point was that the sender was splitting a file into multiple fragments and<br>
+sending each one as a separate email, with each fragment protected by its own password. The<br>
+Base64 content inside was probably some kind of archive — like a ZIP file.</p>
+<p>I quickly threw the Base64 string into <strong>CyberChef</strong>  to see what was hiding inside.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-6.png" alt="alt text"></p>
+<p>My speculation was correct. The bytes <code>PK</code> at the start are the magic bytes that identify a<br>
+<strong>ZIP file</strong> — any ZIP file will start with those two characters. I could also spot a filename<br>
+inside: <code>phreak_plan.pdf.part1</code>.</p>
+<p>With all of this information in hand, my objective became clear — decode every stream, extract<br>
+each part, and find a way to reconstruct the full PDF file.</p>
+<hr>
+<h2 id="deeper-analysis">Deeper Analysis</h2>
+<p>Using the extracted data, I used the online hex editor <strong>HexEdit</strong> to decode each <strong>Base64</strong><br>
+string and reconstruct the ZIP files. Each output was saved with a <code>.zip</code> extension for<br>
+further analysis.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-7.png" alt="alt text"></p>
+<p>Using the password recovered from the same SMTP stream, I was able to unzip the file. Inside,<br>
+I found a file named <code>phreaks_plan.pdf.part1</code>. At first, I tried renaming it to <code>.pdf</code> and<br>
+opening it directly — but that didn't work, since it's only a fragment of the full file, not<br>
+a complete PDF on its own.</p>
+<p>I then uploaded the file to <strong>HexEdit</strong> to examine its <strong>hex dump</strong> (a raw byte-by-byte view<br>
+of the file). It turned out that <code>part1</code> was indeed the very first fragment, and it contained<br>
+the <strong>PDF header</strong> — the beginning section of the file that tells your system &quot;hey, this is<br>
+a PDF.&quot;</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-8.png" alt="alt text"></p>
+<p>To reconstruct the full PDF, I needed to repeat this decryption process for all 15 streams,<br>
+then arrange the parts in ascending order and merge them together — each part picking up exactly<br>
+where the last one left off.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-9.png" alt="alt text"><br>
+<em>Contents of Part 2</em></p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-10.png" alt="alt text"><br>
+<em>Contents of Part 3</em></p>
+<p>And so on...</p>
+<p>After processing all <strong>15 packet streams</strong>, all that was left was to merge them in order from<br>
+<code>part1</code> through <code>part15</code>, stitching the hex data together sequentially. The result was a<br>
+fully reconstructed PDF file. Opening it revealed the flag.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Challenges/Phreaky/image-11.png" alt="alt text"></p>
+<hr>
+<h2 id="final-flag">Final Flag</h2>
+<p><code>HTB{Th3Phr3aksReadyT0Att4ck}</code></p>
+
+</body>
+
+</html>
