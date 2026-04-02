@@ -1,5 +1,7 @@
 # Deadly Arthropod — CTF Writeup
 
+Our operatives have intercepted critical information. Origin? Classified. <br>Objective: Retrieve the flag!
+
 ## Challenge Scenario
 
 **Materials on hand:**
