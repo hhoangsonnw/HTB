@@ -580,18 +580,6 @@ After DCSync, I expected to see Kerberos ticket artifacts. The USN Journal showe
 2025-07-27T20:06:33.604956+00:00 shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt@WOWZA.EDU.kirbi DATA_EXTEND|FILE_CREATE|CLOSE
 ```
 
-The same filename appeared later during cleanup in the IIS log. In the log it was URL-encoded as `%40`, which decodes to `@`:
-
-```text
-shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt%40WOWZA.EDU.kirbi
-```
-
-Decoded, the filename is:
-
-```text
-shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt@WOWZA.EDU.kirbi
-```
-
 The `krbtgt` part of the filename fits a Golden Ticket because Golden Tickets are forged Kerberos TGTs tied to the `krbtgt` account. I checked this against Microsoft Kerberos references and MITRE's Golden Ticket technique page before labeling it that way. Microsoft documents that the KDC uses the `krbtgt` security principal for ticket-granting activity, and MITRE describes Golden Tickets as forged Kerberos TGTs created using the `KRBTGT` account password hash.
 
 Sources:
