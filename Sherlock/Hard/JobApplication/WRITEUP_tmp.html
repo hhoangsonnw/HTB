@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WRITEUP.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h2 id="challenge-scenario">Challenge Scenario</h2>
+<p>Wowza Grand College opened a job application portal where applicants could upload resumes for HR review. Later, the SOC team noticed suspicious certificate enrollments in their AD CS environment and collected evidence from the compromised domain controller.</p>
+<h2 id="evidence-used">Evidence Used</h2>
+<ul>
+<li>IIS access log: <code>log.txt</code></li>
+<li>Windows Security log export: <code>security.json</code></li>
+<li>NTFS artifacts: <code>$MFT</code> / <code>MFT.csv</code> and <code>$Extend\$J</code></li>
+<li>Screenshots included with this writeup</li>
+</ul>
+<hr>
+<h4 id="task-1-when-did-the-threat-actor-first-interact-with-the-colleges-it-infrastructure">Task 1: When did the threat actor first interact with the College's IT infrastructure?</h4>
+<p><strong>Answer:</strong> <code>2025-07-27 19:27:35</code></p>
+<p>I started with the IIS log because the case begins with a resume upload website. The first clearly suspicious external request came from <code>143.198.231.177</code>:</p>
+<pre class="hljs"><code><div>2025-07-27 19:27:35 192.168.189.150 GET /index.aspx - 80 - 143.198.231.177 ... 404
+</div></code></pre>
+<p>Even though the server returned <code>404</code>, this was still the first observed contact from the attacker-controlled IP. That made <code>2025-07-27 19:27:35</code> the starting point of the attack timeline.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image.png" alt="Initial IIS request"></p>
+<hr>
+<h4 id="task-2-what-is-the-malicious-ip-address-used-for-initial-reconnaissance-and-discovery">Task 2: What is the malicious IP address used for initial reconnaissance and discovery?</h4>
+<p><strong>Answer:</strong> <code>143.198.231.177</code></p>
+<p>After finding the first request, I followed the same <code>c-ip</code> value in the IIS log. The address <code>143.198.231.177</code> kept requesting common discovery paths such as <code>/admin</code>, <code>/login</code>, <code>/wp-content</code>, <code>/uploads</code>, <code>/robots.txt</code>, and many random-looking paths.</p>
+<p>The user agent also changed to <code>feroxbuster/2.11.0</code>, which made the behavior look like directory brute forcing rather than normal browsing.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-1.png" alt="Recon requests from the same IP"></p>
+<hr>
+<h4 id="task-3-the-threat-actor-uploaded-a-file-using-the-file-upload-functionality-under-what-name-did-the-server-store-the-uploaded-resume-file">Task 3: The threat actor uploaded a file using the file upload functionality. Under what name did the server store the uploaded resume file?</h4>
+<p><strong>Answer:</strong> <code>Resume9_eba15ba0-81ca-4d0f-9fad-3fc1fc92c181.pdf</code></p>
+<p>The attacker submitted data to the upload page:</p>
+<pre class="hljs"><code><div>2025-07-27 19:32:28 ... POST /default.aspx ... 143.198.231.177 ... 200
+</div></code></pre>
+<p>Shortly after that, the same IP requested a new file from the <code>/resumes/</code> directory:</p>
+<pre class="hljs"><code><div>2025-07-27 19:33:02 ... GET /resumes/Resume9_eba15ba0-81ca-4d0f-9fad-3fc1fc92c181.pdf ... 200
+</div></code></pre>
+<p>That showed me the uploaded resume had been stored by the application as:</p>
+<pre class="hljs"><code><div>Resume9_eba15ba0-81ca-4d0f-9fad-3fc1fc92c181.pdf
+</div></code></pre>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-2.png" alt="Stored uploaded resume"></p>
+<p>One thing I had to keep in mind from this point forward was URL encoding. Some IIS query strings used encodings like <code>%3a</code> for <code>:</code> and <code>%2f</code> for <code>/</code>, while spaces sometimes appeared as <code>+</code>. I decoded those values while writing the investigation so the Windows paths are easier to read.</p>
+<hr>
+<h4 id="task-4-the-threat-actor-uploaded-another-file-in-order-to-change-the-behavior-of-this-website-allowing-the-first-uploaded-file-to-act-as-a-webshell-what-is-the-name-of-the-uploaded-file">Task 4: The threat actor uploaded another file in order to change the behavior of this website, allowing the first uploaded file to act as a webshell. What is the name of the uploaded file?</h4>
+<p><strong>Answer:</strong> <code>web.config</code></p>
+<p>At first, the file looked like a normal PDF upload. The part that changed my direction was what happened next: the <code>.pdf</code> endpoint started accepting parameters such as <code>fdir=</code>, <code>get=</code>, and <code>del=</code>.</p>
+<p>Examples from the IIS log:</p>
+<pre class="hljs"><code><div>GET /resumes/Resume9_...pdf fdir=C:\inetpub\wwwroot\
+GET /resumes/Resume9_...pdf get=C:\Shares\ResumeReview\\Certificate_for_sign.cer
+GET /resumes/Resume9_...pdf fdir=C:\inetpub\wwwroot\resumes\&amp;del=...
+</div></code></pre>
+<p>A real PDF should not browse directories, retrieve files, or delete files. That meant IIS/ASP.NET was treating the uploaded PDF as server-side code.</p>
+<p>This is where I had to research IIS behavior. Microsoft documents that IIS <code>&lt;handlers&gt;</code> mappings define how requests for specific extensions or URLs are processed, and that these mappings can be configured in <code>web.config</code> files. I also found Soroush Dalili's writeup on uploading <code>web.config</code> files, which shows how this can be abused in ASP.NET/IIS environments to make an uploaded file execute as server-side code.</p>
+<p>Sources:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/iis/configuration/system.webserver/handlers/">Microsoft IIS handlers documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/web-config">Microsoft ASP.NET Core web.config documentation</a></li>
+<li><a href="https://soroush.me/blog/uploading-web-config-for-fun-and-profit-2">Uploading web.config for Fun and Profit 2</a></li>
+</ul>
+<p>After that research, <code>web.config</code> made sense as the second uploaded file. It changed how the <code>/resumes/</code> directory handled the PDF file and allowed the first upload to behave as a web shell.</p>
+<hr>
+<h4 id="task-5-using-the-webshell-the-threat-actor-uploaded-a-file-on-the-endpoint-to-facilitate-initial-remote-access-identify-the-full-path-of-this-file">Task 5: Using the webshell, the threat actor uploaded a file on the endpoint to facilitate initial remote access. Identify the full path of this file.</h4>
+<p><strong>Answer:</strong> <code>C:\inetpub\wwwroot\resumes\8619.exe</code></p>
+<p>Once I knew the PDF was acting as a web shell, I looked for tools placed in the same directory. The cleanup phase showed the attacker deleting this file:</p>
+<pre class="hljs"><code><div>2025-07-27 20:11:13 ... del=C:\inetpub\wwwroot\resumes\\8619.exe ... 200
+</div></code></pre>
+<p>The USN Journal confirmed the file had been created earlier:</p>
+<pre class="hljs"><code><div>2025-07-27T19:35:58.859972+00:00 8619.exe DATA_EXTEND|FILE_CREATE|CLOSE
+</div></code></pre>
+<p>I also checked the filename/hash against public malware reputation sources during the original investigation. Those results were not the primary proof for the answer, but they helped me understand why <code>8619.exe</code> was likely an initial access payload instead of a normal uploaded file.</p>
+<p>So the full path of the file used for initial remote access was:</p>
+<pre class="hljs"><code><div>C:\inetpub\wwwroot\resumes\8619.exe
+</div></code></pre>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-3.png" alt="8619.exe deletion through the web shell"></p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-5.png" alt="Joe Sandbox result for 8619.exe"></p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-6.png" alt="VirusTotal result for 8619.exe"></p>
+<hr>
+<h4 id="task-6-the-threat-actor-accessed-a-shared-folder-meant-for-the-resume-reviewers-what-is-the-full-path-of-the-first-file-they-retrieved">Task 6: The threat actor accessed a shared folder meant for the resume reviewers. What is the full path of the first file they retrieved?</h4>
+<p><strong>Answer:</strong> <code>C:\Shares\ResumeReview\Certificate_for_sign.cer</code></p>
+<p>The attacker used the web shell to browse from the web root to the root of <code>C:\</code>, then into <code>C:\Shares\ResumeReview</code>:</p>
+<pre class="hljs"><code><div>fdir=C:\
+fdir=C:\Shares
+fdir=C:\Shares\\ResumeReview
+</div></code></pre>
+<p>The first <code>get=</code> request from that folder retrieved:</p>
+<pre class="hljs"><code><div>C:\Shares\ResumeReview\\Certificate_for_sign.cer
+</div></code></pre>
+<p>After normalizing the double slash, the full path is:</p>
+<pre class="hljs"><code><div>C:\Shares\ResumeReview\Certificate_for_sign.cer
+</div></code></pre>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-7.png" alt="First file retrieved from ResumeReview"></p>
+<hr>
+<h4 id="task-7-who-was-the-first-ideal-candidate-the-company-was-seeking">Task 7: Who was the first ideal candidate the company was seeking?</h4>
+<p><strong>Answer:</strong> <code>warlocksmurf</code></p>
+<p>While reviewing the IIS log, I saw that the attacker did not stop after retrieving the certificate file. They used the same PDF web shell to pull another file from the resume reviewer share:</p>
+<pre class="hljs"><code><div>2025-07-27 19:34:35 ... GET /resumes/Resume9_eba15ba0-81ca-4d0f-9fad-3fc1fc92c181.pdf get=C:\Shares\ResumeReview\\ideal+candidates.txt ... 200
+</div></code></pre>
+<p>The <code>+</code> characters are URL encoding for spaces, so the retrieved file was:</p>
+<pre class="hljs"><code><div>C:\Shares\ResumeReview\ideal candidates.txt
+</div></code></pre>
+<p>At this point, I expected to simply open the file from the extracted evidence. That did not work because the original <code>C:\Shares\ResumeReview</code> folder and <code>ideal candidates.txt</code> were not directly available as normal files. So I had to treat it like a small file recovery problem.</p>
+<p>The manual process would be:</p>
+<ol>
+<li>Search the NTFS <code>$MFT</code> for the filename <code>ideal candidates.txt</code>.</li>
+<li>Find the matching file record.</li>
+<li>Check whether the file's <code>$DATA</code> attribute is resident or non-resident.</li>
+<li>If it is resident, extract the file content directly from the MFT record.</li>
+<li>Decode the recovered bytes as text.</li>
+</ol>
+<p>The <code>$MFT</code>, or Master File Table, stores metadata for files on an NTFS volume. For very small files, NTFS can store the actual file content inside the MFT record itself. This is called resident data. That matters here because the file content can still be recovered even when the original file is not present in the extracted folder.</p>
+<p>Searching for <code>ideal candidates.txt</code> returned one matching record:</p>
+<pre class="hljs"><code><div>Record number: 913
+Full path: /Shares/ResumeReview/ideal candidates.txt
+Preferred name: ideal candidates.txt
+State: In use
+Type: File
+</div></code></pre>
+<p>Then I checked the <code>$DATA</code> attribute:</p>
+<pre class="hljs"><code><div>$DATA attributes
+  Stream: $DATA
+  Resident: True
+  Size: 70
+  Retrieved resident content: 70 bytes
+</div></code></pre>
+<p>The important part is <code>Resident: True</code>. If this had been non-resident, I would have needed to follow NTFS data runs to the disk clusters that held the file content. Since it was resident, the 70 bytes of file content were stored directly inside MFT record <code>913</code>.</p>
+<p>The recovered hex data was:</p>
+<pre class="hljs"><code><div>4c 6f 6f 6b 69 6e 67 20 66 6f 72 20 73 6f 6d 65
+6f 6e 65 20 6c 69 6b 65 20 74 68 65 6d 0d 0a 2d
+20 77 61 72 6c 6f 63 6b 73 6d 75 72 66 0d 0a 2d
+20 74 6d 65 63 68 65 6e 0d 0a 2d 20 6c 75 6b 61
+73 4c 55 5a 53 43
+</div></code></pre>
+<p>Decoding those bytes as text gave:</p>
+<pre class="hljs"><code><div>Looking for someone like them
+- warlocksmurf
+- tmechen
+- lukasLUZSC
+</div></code></pre>
+<p>The first candidate listed was <code>warlocksmurf</code>.</p>
+<p>The screenshot below makes the process look simple because I used my personal tool, <a href="https://github.com/hhoangsonnw/NTFS-Analyzer">NTFS-Analyzer</a>, to automate the repetitive MFT work. The tool lets me search for a filename, shows the matching record, identifies whether the <code>$DATA</code> attribute is resident, and prints the recovered bytes as both hex and text. A reader can use that tool to reproduce the result instead of manually parsing the raw MFT structure byte by byte.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-8.png" alt="Recovered resident data from the MFT"></p>
+<hr>
+<h4 id="task-8-a-file-was-dropped-to-perform-a-potential-kerberoasting-attack-in-the-active-directory-environment-what-is-the-name-of-this-file">Task 8: A file was dropped to perform a potential Kerberoasting attack in the Active Directory environment. What is the name of this file?</h4>
+<p><strong>Answer:</strong> <code>r.exe</code></p>
+<p>I looked for attacker tools staged in the upload directory. During cleanup, the attacker deleted:</p>
+<pre class="hljs"><code><div>C:\inetpub\wwwroot\resumes\r.exe
+</div></code></pre>
+<p>The IIS cleanup request was:</p>
+<pre class="hljs"><code><div>2025-07-27 20:11:36 ... del=C:\inetpub\wwwroot\resumes\\r.exe ... 200
+</div></code></pre>
+<p>The USN Journal showed that <code>r.exe</code> had been created much earlier:</p>
+<pre class="hljs"><code><div>2025-07-27T19:40:15.000068+00:00 r.exe DATA_EXTEND|FILE_CREATE|CLOSE
+</div></code></pre>
+<p>The short name fits the pattern of a renamed AD attack tool. In this timeline, it appears before the AD CS activity and later gets removed with the other attacker tools.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-9.png" alt="r.exe cleanup entry"></p>
+<hr>
+<h4 id="task-9-which-service-account-was-targeted-by-this-active-directory-attack">Task 9: Which service account was targeted by this Active Directory attack?</h4>
+<p><strong>Answer:</strong> <code>WOWZA\ca_svc</code></p>
+<p>For the AD portion, I moved from IIS logs to the Windows Security log. I first had to research which Windows events are useful for AD CS investigations. Microsoft's AD CS auditing references showed that Event ID <code>4886</code> is generated when Certificate Services receives a certificate request, and Event ID <code>4887</code> is generated when Certificate Services approves and issues one.</p>
+<p>Sources:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-certification-services">Microsoft - Audit Certification Services</a></li>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn786423%28v%3Dws.11%29">Microsoft - Securing PKI: Events to Monitor</a></li>
+<li><a href="https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4887">Ultimate Windows Security - Event ID 4887</a></li>
+</ul>
+<p>With that context, Certificate Services Event ID <code>4886</code> showed a certificate request submitted by:</p>
+<pre class="hljs"><code><div>Requester: WOWZA\ca_svc
+</div></code></pre>
+<p>The same event contained suspicious request attributes:</p>
+<pre class="hljs"><code><div>CertificateTemplate:PDFSigner
+SAN:upn=Administrator
+</div></code></pre>
+<p>So the attacker was using or abusing the <code>WOWZA\ca_svc</code> account to request certificates, while trying to place <code>Administrator</code> into the certificate's UPN.</p>
+<hr>
+<h4 id="task-10-attacker-dropped-another-tool-to-exploit-a-misconfiguration-in-ad-cs-when-was-this-tool-successfully-created-on-the-endpoint">Task 10: Attacker dropped another tool to exploit a misconfiguration in AD CS. When was this tool successfully created on the endpoint?</h4>
+<p><strong>Answer:</strong> <code>2025-07-27 19:52:03</code></p>
+<p>The attacker later deleted <code>Certipy.exe</code> from the upload directory:</p>
+<pre class="hljs"><code><div>2025-07-27 20:11:31 ... del=C:\inetpub\wwwroot\resumes\\Certipy.exe ... 200
+</div></code></pre>
+<p>At first this was just another deleted executable, so I researched the filename before deciding why it mattered. Certipy is a public tool for Active Directory Certificate Services enumeration and abuse, and the SpecterOps &quot;Certified Pre-Owned&quot; research explains why AD CS misconfigurations can lead to privilege escalation and domain compromise.</p>
+<p>Sources:</p>
+<ul>
+<li><a href="https://github.com/ly4k/Certipy">Certipy GitHub repository</a></li>
+<li><a href="https://github.com/ly4k/Certipy/wiki">Certipy Wiki</a></li>
+<li><a href="https://specterops.io/blog/2021/06/17/certified-pre-owned/">SpecterOps - Certified Pre-Owned</a></li>
+</ul>
+<p>To find when it was actually created, I checked the USN Journal. The first create event happened at <code>19:51:32</code>, but the important completed-write event was:</p>
+<pre class="hljs"><code><div>2025-07-27T19:52:03.015636+00:00 Certipy.exe DATA_EXTEND|FILE_CREATE|CLOSE
+</div></code></pre>
+<p>The <code>CLOSE</code> flag showed that the file handle closed after the data was written. I treated that as the successful creation time.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-10.png" alt="Certipy.exe USN Journal events"></p>
+<hr>
+<h4 id="task-11-when-was-ad-cs-exploited-successfully-on-the-domain-controller">Task 11: When was AD CS exploited successfully on the domain controller?</h4>
+<p><strong>Answer:</strong> <code>2025-07-27 19:56:38</code></p>
+<p>I searched the Security log around the AD CS events and found the abuse beginning at:</p>
+<pre class="hljs"><code><div>2025-07-27T19:56:38.095869Z
+</div></code></pre>
+<p>The event was Security Event ID <code>4886</code>:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"EventID"</span>: <span class="hljs-number">4886</span>,
+  <span class="hljs-attr">"RequestId"</span>: <span class="hljs-string">"6"</span>,
+  <span class="hljs-attr">"Requester"</span>: <span class="hljs-string">"WOWZA\\ca_svc"</span>,
+  <span class="hljs-attr">"Attributes"</span>: <span class="hljs-string">"CertificateTemplate:PDFSigner\nSAN:upn=Administrator"</span>
+}
+</div></code></pre>
+<p>This was the first moment where the attacker requested a certificate from the vulnerable template while supplying <code>Administrator</code> as the UPN.</p>
+<p>The same second also contained the template modification events that made the abuse possible. After checking Microsoft's PKI event list, I treated Event ID <code>4900</code> as especially important because it records certificate template security updates. Event ID <code>4900</code> showed the <code>PDFSigner</code> template security descriptor being changed, and Event ID <code>4898</code> showed the modified template content:</p>
+<pre class="hljs"><code><div>NewSecurityDescriptor: NT AUTHORITY\Authenticated Users - Full Control
+msPKI-Certificate-Name-Flag: CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT
+pKIExtendedKeyUsage: Client Authentication
+</div></code></pre>
+<p>Those settings matter because they let an authenticated requester supply another identity in the certificate request and use the resulting certificate for authentication.</p>
+<p>The later chain confirmed that the abuse worked:</p>
+<ul>
+<li><code>19:56:49</code>: certificate issued for the suspicious request</li>
+<li><code>19:59:15</code>: successful Kerberos TGT request for <code>Administrator</code> using certificate-based authentication</li>
+</ul>
+<p>So the AD CS exploitation point was <code>2025-07-27 19:56:38</code>, with the successful authentication appearing a few minutes later.</p>
+<hr>
+<h4 id="task-12-identify-the-name-and-version-of-the-vulnerable-certificate-template-exploited-in-the-attack">Task 12: Identify the name and version of the vulnerable certificate template exploited in the attack.</h4>
+<p><strong>Answer:</strong> <code>PDFSigner v100.4</code></p>
+<p>The certificate request pointed to the <code>PDFSigner</code> template, so I searched for template-load/change events involving that name.</p>
+<p>I researched AD CS template events before trusting the field names. Microsoft lists Event ID <code>4898</code> as &quot;Certificate Services loaded a template&quot;, and the event includes the template name, version, schema version, template content, and security descriptor. I also used Ultimate Windows Security and Lares Labs as supporting references for how this event appears during AD CS investigations.</p>
+<p>Sources:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-certification-services">Microsoft - Audit Certification Services</a></li>
+<li><a href="https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4898">Ultimate Windows Security - Event ID 4898</a></li>
+<li><a href="https://labs.lares.com/adcs-exploits-investigations-pt1/">Lares Labs - ADCS Exploits &amp; Investigations</a></li>
+</ul>
+<p>The relevant Security log entries showed:</p>
+<pre class="hljs"><code><div>TemplateInternalName: PDFSigner
+TemplateVersion: 100.4
+TemplateSchemaVersion: 2
+</div></code></pre>
+<p>That identified the exploited template as:</p>
+<pre class="hljs"><code><div>PDFSigner v100.4
+</div></code></pre>
+<p>The same template later appeared in the malicious request:</p>
+<pre class="hljs"><code><div>CertificateTemplate:PDFSigner
+SAN:upn=Administrator
+</div></code></pre>
+<hr>
+<h4 id="task-13-a-new-security-descriptor-was-applied-to-the-vulnerable-certificate-template-and-this-security-descriptor-grants-full-control-over-the-certificate-template-to-a-specific-group-what-is-the-name-of-that-group">Task 13: A new security descriptor was applied to the vulnerable certificate template and this security descriptor grants full control over the certificate template to a specific group. What is the name of that group?</h4>
+<p><strong>Answer:</strong> <code>Authenticated Users</code></p>
+<p>This part needed the certificate template change event, not just the request event. Security Event ID <code>4900</code> showed the <code>PDFSigner</code> template being changed at <code>2025-07-27T19:56:38.185611Z</code>.</p>
+<p>This was a correction from my first pass. Event ID <code>4898</code> is useful for seeing the loaded template, but Event ID <code>4900</code> is the stronger evidence for this question because it records that the certificate template security was updated and includes the <code>NewSecurityDescriptor</code>.</p>
+<p>The <code>NewSecurityDescriptor</code> contained:</p>
+<pre class="hljs"><code><div>Allow(0x000f01ff) NT AUTHORITY\Authenticated Users
+Full Control
+</div></code></pre>
+<p>The short SID name in the descriptor was <code>AU</code>, which maps to <code>Authenticated Users</code>.</p>
+<p>That was a dangerous change because <code>Authenticated Users</code> includes normal authenticated domain users. Giving that group Full Control over the certificate template made the template much easier to abuse.</p>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-11.png" alt="PDFSigner security descriptor"></p>
+<hr>
+<h4 id="task-14-when-was-the-certificate-issued-to-the-threat-actor-for-a-high-privilege-user-allowing-privilege-escalation">Task 14: When was the certificate issued to the threat actor for a high-privilege user, allowing privilege escalation?</h4>
+<p><strong>Answer:</strong> <code>2025-07-27 19:57:55</code></p>
+<p>I searched for another certificate request using the same pattern:</p>
+<pre class="hljs"><code><div>CertificateTemplate:PDFSigner
+SAN:upn=Administrator
+</div></code></pre>
+<p>At <code>2025-07-27T19:57:55.575004Z</code>, Event ID <code>4886</code> showed request ID <code>8</code>:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"EventID"</span>: <span class="hljs-number">4886</span>,
+  <span class="hljs-attr">"RequestId"</span>: <span class="hljs-string">"8"</span>,
+  <span class="hljs-attr">"Requester"</span>: <span class="hljs-string">"WOWZA\\ca_svc"</span>,
+  <span class="hljs-attr">"Attributes"</span>: <span class="hljs-string">"CertificateTemplate:PDFSigner\nSAN:upn=Administrator"</span>
+}
+</div></code></pre>
+<p>Immediately after that, Event ID <code>4887</code> showed the certificate was issued:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"EventID"</span>: <span class="hljs-number">4887</span>,
+  <span class="hljs-attr">"SystemTime"</span>: <span class="hljs-string">"2025-07-27T19:57:55.676311Z"</span>,
+  <span class="hljs-attr">"RequestId"</span>: <span class="hljs-string">"8"</span>,
+  <span class="hljs-attr">"Requester"</span>: <span class="hljs-string">"WOWZA\\ca_svc"</span>,
+  <span class="hljs-attr">"Attributes"</span>: <span class="hljs-string">"CertificateTemplate:PDFSigner\nSAN:upn=Administrator"</span>,
+  <span class="hljs-attr">"Disposition"</span>: <span class="hljs-string">"3"</span>
+}
+</div></code></pre>
+<p>The matching <code>RequestId: 8</code> tied the issued certificate directly to the request for <code>Administrator</code>. The task asks for the issued time, so the rounded answer is:</p>
+<pre class="hljs"><code><div>2025-07-27 19:57:55
+</div></code></pre>
+<hr>
+<h4 id="task-15-the-threat-actor-successfully-retrieved-the-ntlm-hash-of-a-high-privilege-user-using-the-newly-issued-certificate-what-was-the-serial-number-of-the-certificate-used-to-achieve-this-privilege-escalation">Task 15: The threat actor successfully retrieved the NTLM hash of a high-privilege user using the newly issued certificate. What was the serial number of the certificate used to achieve this privilege escalation?</h4>
+<p><strong>Answer:</strong> <code>1D00000008A6E7524F029E603A000000000008</code></p>
+<p>After the certificate was issued, I looked for Kerberos authentication using a certificate. Security Event ID <code>4768</code> showed a successful TGT request for <code>Administrator</code>:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"EventID"</span>: <span class="hljs-number">4768</span>,
+  <span class="hljs-attr">"TargetUserName"</span>: <span class="hljs-string">"Administrator"</span>,
+  <span class="hljs-attr">"ServiceName"</span>: <span class="hljs-string">"krbtgt"</span>,
+  <span class="hljs-attr">"Status"</span>: <span class="hljs-string">"0x0"</span>,
+  <span class="hljs-attr">"PreAuthType"</span>: <span class="hljs-string">"16"</span>,
+  <span class="hljs-attr">"CertIssuerName"</span>: <span class="hljs-string">"wowza-MAIN-DC-CA"</span>,
+  <span class="hljs-attr">"CertSerialNumber"</span>: <span class="hljs-string">"1D00000008A6E7524F029E603A000000000008"</span>,
+  <span class="hljs-attr">"CertThumbprint"</span>: <span class="hljs-string">"15F5FE778E03BB9278B655827572EB2AA1AAFA9F"</span>
+}
+</div></code></pre>
+<p>The important parts were:</p>
+<ul>
+<li><code>TargetUserName: Administrator</code></li>
+<li><code>Status: 0x0</code>, meaning success</li>
+<li><code>PreAuthType: 16</code>, indicating certificate-based Kerberos authentication</li>
+<li><code>CertSerialNumber</code>, which identifies the certificate used</li>
+</ul>
+<p>I checked Microsoft's Event ID <code>4768</code> documentation while working through this because I wanted to be sure I was reading the Kerberos event correctly. Event ID <code>4768</code> is generated when a Kerberos TGT is requested, so a successful <code>4768</code> for <code>Administrator</code> after the certificate issuance connected the AD CS abuse to privileged authentication.</p>
+<p>Source:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4768">Microsoft - Event ID 4768: A Kerberos authentication ticket was requested</a></li>
+</ul>
+<hr>
+<h4 id="task-16-the-attacker-exploited-an-active-directory-misconfiguration-to-gain-access-to-active-directory-secrets-stored-on-the-domain-controller-what-is-the-mitre-attck-id-for-this-technique">Task 16: The attacker exploited an Active Directory misconfiguration to gain access to Active Directory secrets stored on the domain controller. What is the MITRE ATT&amp;CK ID for this technique?</h4>
+<p><strong>Answer:</strong> <code>T1003.006</code></p>
+<p>At this point in the timeline, the attacker had authenticated as <code>Administrator</code>. The next suspicious behavior was access to Active Directory replication permissions, which is the pattern used by DCSync.</p>
+<p>DCSync lets an attacker with enough privilege ask the domain controller for replicated credential data, including password hashes.</p>
+<p>I researched the technique name instead of guessing from the tool alone. MITRE ATT&amp;CK maps DCSync to:</p>
+<pre class="hljs"><code><div>T1003.006 - OS Credential Dumping: DCSync
+</div></code></pre>
+<p>Source:</p>
+<ul>
+<li><a href="https://attack.mitre.org/techniques/T1003/006/">MITRE ATT&amp;CK - OS Credential Dumping: DCSync (T1003.006)</a></li>
+</ul>
+<hr>
+<h4 id="task-17-when-was-the-attack-mentioned-in-the-previous-task-successfully-carried-out">Task 17: When was the attack mentioned in the previous task successfully carried out?</h4>
+<p><strong>Answer:</strong> <code>2025-07-27 20:05:14</code></p>
+<p>To confirm DCSync, I looked for directory service access events with replication GUIDs.</p>
+<p>The MITRE DCSync page gave me the technique name, but the Windows evidence still had to come from the Security log. That is why I focused on Event ID <code>4662</code> and replication-related GUIDs rather than just saying &quot;secretsdump.exe existed&quot;.</p>
+<p>First, the Security log showed an <code>Administrator</code> network logon:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"EventID"</span>: <span class="hljs-number">4624</span>,
+  <span class="hljs-attr">"SystemTime"</span>: <span class="hljs-string">"2025-07-27T20:05:14.577498Z"</span>,
+  <span class="hljs-attr">"TargetUserName"</span>: <span class="hljs-string">"Administrator"</span>,
+  <span class="hljs-attr">"LogonType"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"IpAddress"</span>: <span class="hljs-string">"127.0.0.1"</span>,
+  <span class="hljs-attr">"TargetLogonId"</span>: <span class="hljs-string">"0x96a4b9"</span>
+}
+</div></code></pre>
+<p>Immediately after that, Event ID <code>4662</code> showed directory service access by the same logon session:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"EventID"</span>: <span class="hljs-number">4662</span>,
+  <span class="hljs-attr">"SystemTime"</span>: <span class="hljs-string">"2025-07-27T20:05:14.687160Z"</span>,
+  <span class="hljs-attr">"SubjectUserName"</span>: <span class="hljs-string">"Administrator"</span>,
+  <span class="hljs-attr">"SubjectLogonId"</span>: <span class="hljs-string">"0x96a4b9"</span>,
+  <span class="hljs-attr">"ObjectServer"</span>: <span class="hljs-string">"DS"</span>,
+  <span class="hljs-attr">"AccessMask"</span>: <span class="hljs-string">"0x100"</span>
+}
+</div></code></pre>
+<p>The <code>Properties</code> field contained AD replication GUIDs:</p>
+<pre class="hljs"><code><div>{1131f6aa-9c07-11d1-f79f-00c04fc2dcd2}
+{1131f6ad-9c07-11d1-f79f-00c04fc2dcd2}
+</div></code></pre>
+<p>Those correspond to replication permissions such as <code>DS-Replication-Get-Changes</code> and <code>DS-Replication-Get-Changes-All</code>, which are strong DCSync indicators.</p>
+<p>The first DCSync-related event occurred in the <code>20:05:14</code> second, so the answer is:</p>
+<pre class="hljs"><code><div>2025-07-27 20:05:14
+</div></code></pre>
+<hr>
+<h4 id="task-18-a-golden-ticket-was-issued-using-a-previously-dropped-tool-what-is-the-filename-of-this-ticket">Task 18: A Golden Ticket was issued using a previously dropped tool. What is the filename of this ticket?</h4>
+<p><strong>Answer:</strong> <code>shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt@WOWZA.EDU.kirbi</code></p>
+<p>After DCSync, I expected to see Kerberos ticket artifacts. The USN Journal showed a <code>.kirbi</code> file being created:</p>
+<pre class="hljs"><code><div>2025-07-27T20:06:33.604956+00:00 shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt@WOWZA.EDU.kirbi DATA_EXTEND|FILE_CREATE|CLOSE
+</div></code></pre>
+<p>The same filename appeared later during cleanup in the IIS log. In the log it was URL-encoded as <code>%40</code>, which decodes to <code>@</code>:</p>
+<pre class="hljs"><code><div>shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt%40WOWZA.EDU.kirbi
+</div></code></pre>
+<p>Decoded, the filename is:</p>
+<pre class="hljs"><code><div>shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt@WOWZA.EDU.kirbi
+</div></code></pre>
+<p>The <code>krbtgt</code> part of the filename fits a Golden Ticket because Golden Tickets are forged Kerberos TGTs tied to the <code>krbtgt</code> account. I checked this against Microsoft Kerberos references and MITRE's Golden Ticket technique page before labeling it that way. Microsoft documents that the KDC uses the <code>krbtgt</code> security principal for ticket-granting activity, and MITRE describes Golden Tickets as forged Kerberos TGTs created using the <code>KRBTGT</code> account password hash.</p>
+<p>Sources:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/windows/win32/secauthn/key-distribution-center">Microsoft - Key Distribution Center</a></li>
+<li><a href="https://learn.microsoft.com/en-us/windows/win32/secauthn/ticket-granting-tickets">Microsoft - Ticket-Granting Tickets</a></li>
+<li><a href="https://attack.mitre.org/techniques/T1558/001/">MITRE ATT&amp;CK - Golden Ticket (T1558.001)</a></li>
+</ul>
+<hr>
+<h4 id="task-19-the-threat-actor-used-the-web-shell-to-delete-all-files-involved-in-this-operation-when-did-the-deletion-routine-begin">Task 19: The threat actor used the web shell to delete all files involved in this operation. When did the deletion routine begin?</h4>
+<p><strong>Answer:</strong> <code>2025-07-27 20:11:13</code></p>
+<p>The cleanup routine was visible in the IIS log because the attacker used the web shell with the <code>del=</code> parameter.</p>
+<p>The first deletion request was:</p>
+<pre class="hljs"><code><div>2025-07-27 20:11:13 ... del=C:\inetpub\wwwroot\resumes\\8619.exe ... 200
+</div></code></pre>
+<p>The USN Journal confirmed the matching delete event:</p>
+<pre class="hljs"><code><div>2025-07-27T20:11:13.980332+00:00 8619.exe FILE_DELETE|CLOSE
+</div></code></pre>
+<p><img src="file:///Users/hoangson/Documents/CTF/Writeup/HTB/Sherlocks/JobApplication/image-12.png" alt="Deletion routine begins"></p>
+<p>After that, the attacker deleted the rest of the operation files:</p>
+<ul>
+<li><code>administrator.ccache</code></li>
+<li><code>administrator.pfx</code></li>
+<li><code>Certipy.exe</code></li>
+<li><code>PDFSigner.json</code></li>
+<li><code>r.exe</code></li>
+<li><code>secretsdump.exe</code></li>
+<li><code>shinyboi_wowza_edu_2025_07_27_20_06_33_Administratorr_to_krbtgt@WOWZA.EDU.kirbi</code></li>
+</ul>
+<hr>
+<h2 id="attack-timeline">Attack Timeline</h2>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Phase</th>
+<th>Evidence</th>
+<th>What I concluded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2025-07-27 19:27:35</code></td>
+<td>Initial recon</td>
+<td>IIS <code>GET /index.aspx</code> from <code>143.198.231.177</code></td>
+<td>First observed attacker interaction with the web server.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:32:28</code></td>
+<td>Upload</td>
+<td>IIS <code>POST /default.aspx</code> from <code>143.198.231.177</code></td>
+<td>The attacker used the resume upload function.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:33:02</code></td>
+<td>Uploaded file accessed</td>
+<td>IIS <code>GET /resumes/Resume9_eba15ba0-81ca-4d0f-9fad-3fc1fc92c181.pdf</code></td>
+<td>The server stored the uploaded resume under this generated filename.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:33:17</code></td>
+<td>Web shell behavior begins</td>
+<td>Uploaded PDF receives web-shell style parameters</td>
+<td>The PDF was no longer behaving like a normal static document.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:34:23</code></td>
+<td>File retrieval</td>
+<td><code>get=C:\Shares\ResumeReview\\Certificate_for_sign.cer</code></td>
+<td>The attacker retrieved the first file from the resume reviewer share.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:34:35</code></td>
+<td>File retrieval</td>
+<td><code>get=C:\Shares\ResumeReview\\ideal+candidates.txt</code></td>
+<td>The attacker retrieved <code>ideal candidates.txt</code>, later recovered from the MFT.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:35:58</code></td>
+<td>Tool staging</td>
+<td>USN Journal: <code>8619.exe</code> with <code>DATA_EXTEND</code>, <code>FILE_CREATE</code>, <code>CLOSE</code></td>
+<td>Initial remote access tool/payload was successfully written.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:40:15</code></td>
+<td>Tool staging</td>
+<td>USN Journal: <code>r.exe</code> with <code>DATA_EXTEND</code>, <code>FILE_CREATE</code>, <code>CLOSE</code></td>
+<td>Potential Kerberoasting/Kerberos abuse tool was staged.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:52:03</code></td>
+<td>AD CS tool staging</td>
+<td>USN Journal: <code>Certipy.exe</code> with <code>DATA_EXTEND</code>, <code>FILE_CREATE</code>, <code>CLOSE</code></td>
+<td>Certipy was successfully created before the AD CS abuse.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:56:38</code></td>
+<td>AD CS abuse</td>
+<td>Security <code>4886</code>, <code>4900</code>, and <code>4898</code> around <code>PDFSigner</code></td>
+<td>Certificate template abuse started; <code>Authenticated Users</code> received Full Control and the request included <code>SAN:upn=Administrator</code>.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:57:55</code></td>
+<td>Certificate issued</td>
+<td>Security <code>4887</code>, <code>RequestId: 8</code>, <code>Disposition: 3</code></td>
+<td>A certificate was issued for the malicious <code>PDFSigner</code> request targeting <code>Administrator</code>.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 19:59:15</code></td>
+<td>Privileged authentication</td>
+<td>Security <code>4768</code>, <code>TargetUserName: Administrator</code>, <code>PreAuthType: 16</code></td>
+<td>The issued certificate was used for certificate-based Kerberos authentication.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 20:04:00</code></td>
+<td>Credential dumping tool staging</td>
+<td>USN Journal: <code>secretsdump.exe</code> with <code>DATA_EXTEND</code>, <code>FILE_CREATE</code>, <code>CLOSE</code></td>
+<td>The attacker staged a tool commonly used for dumping AD secrets.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 20:05:14</code></td>
+<td>DCSync</td>
+<td>Security <code>4624</code> followed by <code>4662</code> replication GUIDs</td>
+<td>DCSync-style credential dumping began under the <code>Administrator</code> session.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 20:06:33</code></td>
+<td>Golden Ticket creation</td>
+<td>USN Journal: <code>.kirbi</code> with <code>DATA_EXTEND</code>, <code>FILE_CREATE</code>, <code>CLOSE</code></td>
+<td>A Kerberos ticket artifact was created after DCSync.</td>
+</tr>
+<tr>
+<td><code>2025-07-27 20:11:13</code></td>
+<td>Cleanup</td>
+<td>IIS <code>del=C:\inetpub\wwwroot\resumes\\8619.exe</code></td>
+<td>The web-shell cleanup routine began.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mitre-attck-mapping">MITRE ATT&amp;CK Mapping</h2>
+<table>
+<thead>
+<tr>
+<th>Tactic</th>
+<th>Technique ID</th>
+<th>Technique</th>
+<th>Evidence in this case</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reconnaissance</td>
+<td><a href="https://attack.mitre.org/techniques/T1595/003/">T1595.003</a></td>
+<td>Active Scanning: Wordlist Scanning</td>
+<td><code>feroxbuster/2.11.0</code> and many common discovery paths from <code>143.198.231.177</code>.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Initial Access</td>
+<td><a href="https://attack.mitre.org/techniques/T1190/">T1190</a></td>
+<td>Exploit Public-Facing Application</td>
+<td>The public resume upload site was abused to place files that led to code execution through IIS/ASP.NET behavior.</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td><a href="https://attack.mitre.org/techniques/T1505/003/">T1505.003</a></td>
+<td>Server Software Component: Web Shell</td>
+<td>The uploaded PDF accepted <code>fdir=</code>, <code>get=</code>, and <code>del=</code> parameters after <code>web.config</code> changed handler behavior.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Command and Control</td>
+<td><a href="https://attack.mitre.org/techniques/T1105/">T1105</a></td>
+<td>Ingress Tool Transfer</td>
+<td><code>8619.exe</code>, <code>r.exe</code>, <code>Certipy.exe</code>, and <code>secretsdump.exe</code> were staged under <code>C:\inetpub\wwwroot\resumes\</code>.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Credential Access</td>
+<td><a href="https://attack.mitre.org/techniques/T1558/003/">T1558.003</a></td>
+<td>Steal or Forge Kerberos Tickets: Kerberoasting</td>
+<td><code>r.exe</code> was staged before the AD/Kerberos activity and the task context identifies it as a potential Kerberoasting tool.</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Credential Access / Privilege Escalation</td>
+<td><a href="https://attack.mitre.org/techniques/T1649/">T1649</a></td>
+<td>Steal or Forge Authentication Certificates</td>
+<td>AD CS abuse through <code>PDFSigner</code>, <code>SAN:upn=Administrator</code>, and certificate-based authentication as <code>Administrator</code>.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Credential Access</td>
+<td><a href="https://attack.mitre.org/techniques/T1003/006/">T1003.006</a></td>
+<td>OS Credential Dumping: DCSync</td>
+<td>Security <code>4662</code> events contained replication GUIDs such as <code>DS-Replication-Get-Changes</code> and <code>DS-Replication-Get-Changes-All</code>.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Credential Access</td>
+<td><a href="https://attack.mitre.org/techniques/T1558/001/">T1558.001</a></td>
+<td>Steal or Forge Kerberos Tickets: Golden Ticket</td>
+<td><code>.kirbi</code> file referencing <code>Administratorr_to_krbtgt@WOWZA.EDU</code> was created after DCSync.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td><a href="https://attack.mitre.org/techniques/T1005/">T1005</a></td>
+<td>Data from Local System</td>
+<td>The web shell retrieved files from <code>C:\Shares\ResumeReview</code>, including <code>Certificate_for_sign.cer</code> and <code>ideal candidates.txt</code>.</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td><a href="https://attack.mitre.org/techniques/T1070/004/">T1070.004</a></td>
+<td>Indicator Removal: File Deletion</td>
+<td>The attacker used the web shell <code>del=</code> parameter to remove tools and artifacts during cleanup.</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+</body>
+
+</html>
